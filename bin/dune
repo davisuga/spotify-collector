@@ -1,0 +1,4 @@
+(executable
+ (public_name spotifyCollector)
+ (name main)
+ (libraries spotifyCollector))
