@@ -1,2 +1,3 @@
 (library
- (name spotifyCollector))
+ (name spotifyCollector)
+ (libraries lwt yojson cohttp))
