@@ -1,6 +1,7 @@
 open Utils.Env
+open Http
 
 let main =
-  match getVar "CLIENT_SECRET" with
+  match getVar "TOKEN" with
   | Error msg -> print_string msg
-  | Ok key -> print_string key
+  | Ok key -> Spotify.getTops key |> Lwt_main.run |> print_string
