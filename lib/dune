@@ -1,5 +1,5 @@
 (library
  (name spotifyCollector)
- (libraries lwt yojson cohttp unix str uri)
+ (libraries lwt yojson cohttp unix str uri cohttp-lwt-unix)
  (preprocess
   (pps ppx_deriving_yojson)))
