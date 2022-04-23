@@ -11,7 +11,7 @@ let show_response resp body =
   Printf.printf "Headers: %s\n"
     (resp |> Response.headers |> Cohttp.Header.to_string);
   body |> Cohttp_lwt.Body.to_string >|= fun body ->
-  Printf.printf "Body of length: %d\n" (String.length body)
+  Printf.printf "Body: %s\n" body
 
 module Spotify = struct
   let base_url = "https://api.spotify.com/v1"
@@ -49,4 +49,12 @@ module Spotify = struct
     Cohttp_lwt.Body.to_string body
 
   let save_data data = data
+
+  let authorize _ =
+    let url =
+      "https://accounts.spotify.com/authorize?client_id=2c07c58bb20c4f529f5e262b85b6b1ba&response_type=token&state=67ff85d4-955a-44bf-b778-5bdba96f9903&scope=user-top-read%20playlist-modify-public%20playlist-modify-private%20user-read-private%20user-read-recently-played&redirect_uri=https%3A%2F%2Fwww.statsforspotify.com%2Flogin%2Fcallback&show_dialog=false"
+    in
+    Client.get (Uri.of_string url) >>= fun (res, body) ->
+    let _ = show_response res body in
+    Cohttp_lwt.Body.to_string body
 end
